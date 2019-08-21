@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/collin/code/net/AspNetTodo/AspNetTodo/AspNetTodo.csproj": {}
+    "/Users/collin/code/net/AspNetTodo/AspNetTodo.csproj": {}
   },
   "projects": {
-    "/Users/collin/code/net/AspNetTodo/AspNetTodo/AspNetTodo.csproj": {
+    "/Users/collin/code/net/AspNetTodo/AspNetTodo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/collin/code/net/AspNetTodo/AspNetTodo/AspNetTodo.csproj",
+        "projectUniqueName": "/Users/collin/code/net/AspNetTodo/AspNetTodo.csproj",
         "projectName": "AspNetTodo",
-        "projectPath": "/Users/collin/code/net/AspNetTodo/AspNetTodo/AspNetTodo.csproj",
+        "projectPath": "/Users/collin/code/net/AspNetTodo/AspNetTodo.csproj",
         "packagesPath": "/Users/collin/.nuget/packages/",
-        "outputPath": "/Users/collin/code/net/AspNetTodo/AspNetTodo/obj/",
+        "outputPath": "/Users/collin/code/net/AspNetTodo/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
