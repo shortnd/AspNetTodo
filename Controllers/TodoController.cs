@@ -3,23 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using AspNetTodo.Services;
 using AspNetTodo.Models;
 
 namespace AspNetTodo.Controllers
 {
+    [Authorize]
     public class TodoController : Controller
     {
         private readonly ITodoItemService _todoItemService;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public TodoController(ITodoItemService todoItemService)
+        public TodoController(ITodoItemService todoItemService, UserManager<IdentityUser> userManager)
         {
             _todoItemService = todoItemService;
+            _userManager = userManager;
         }
         public async Task<IActionResult> Index()
         {
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null) return Challenge();
+
             // Get to-do items form database
-            var items = await _todoItemService.GetIncompleteItemsAsync();
+            var items = await _todoItemService.GetIncompleteItemsAsync(currentUser);
 
             // Put items into model
             var model = new TodoViewModel()
@@ -38,8 +46,11 @@ namespace AspNetTodo.Controllers
             {
                 return RedirectToAction("Index");
             }
+
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null) return Challenge();
             
-            var successful = await _todoItemService.AddItemAsync(newItem);
+            var successful = await _todoItemService.AddItemAsync(newItem, currentUser);
 
             if (! successful)
             {
@@ -56,8 +67,11 @@ namespace AspNetTodo.Controllers
             {
                 return RedirectToAction("Index");
             }
+            
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null) return Challenge();
 
-            var successful = await _todoItemService.MarkDoneAsync(id);
+            var successful = await _todoItemService.MarkDoneAsync(id, currentUser);
 
             if (!successful)
             {
